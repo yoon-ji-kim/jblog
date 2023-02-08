@@ -12,12 +12,17 @@
 		<id property="no" column="no"/>
 		<result property="name" column="name"/>
 		<result property="id" column="id"/>
+		<result property="postCount" column="count(category_no)" />
 	</resultMap>
 	<select id="findById" parameterType="string" resultMap="findList">
 		<![CDATA[
-		select no, name, id
-		from category
+		select a.no, a.name, id, count(category_no)
+		from category a
+		left join post b
+		on a.no = b.category_no
 		where id = #{id }
+		group by category_no
+		order by a.no
 		]]>
 	</select>
 	

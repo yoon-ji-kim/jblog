@@ -24,35 +24,20 @@
 		      			<th>번호</th>
 		      			<th>카테고리명</th>
 		      			<th>포스트 수</th>
-		      			<th>설명</th>
 		      			<th>삭제</th>      			
 		      		</tr>
-		      		<c:forEach items="#{list }" var="vo" varStatus="status">
+		      		<c:forEach items="${list }" var="vo" varStatus="status">
 		      			<tr>
 							<td>${status.count }</td>
 							<td>${vo.name }</td>
-							<td>10</td>
+							<td>${vo.postCount }</td>
 							<td>
 								<a href="${pageContext.request.contextPath }/blog/${authUser.id}/admin/category/delete/${vo.no}">
 									<img src="${pageContext.request.contextPath}/assets/images/delete.jpg">
 								</a>
 							</td>
 						</tr> 
-		      		</c:forEach> 
-					<tr>
-						<td>2</td>
-						<td>스프링 스터디</td>
-						<td>20</td>
-						<td>어쩌구 저쩌구</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>스프링 프로젝트</td>
-						<td>15</td>
-						<td>어쩌구 저쩌구</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>					  
+		      		</c:forEach>  
 				</table>
       	
       			<h4 class="n-c">새로운 카테고리 추가</h4>
@@ -61,10 +46,6 @@
 			      		<tr>
 			      			<td class="t">카테고리명</td>
 			      			<td><input type="text" name="name"></td>
-			      		</tr>
-			      		<tr>
-			      			<td class="t">설명</td>
-			      			<td><input type="text" name="desc"></td>
 			      		</tr>
 			      		<tr>
 			      			<td class="s">&nbsp;</td>
