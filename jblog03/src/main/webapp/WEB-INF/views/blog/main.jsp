@@ -18,6 +18,9 @@
 		<div id="wrapper">
 			<div id="content">
 				<div class="blog-content">
+					<c:if test="${empty post }">
+						<h4>작성된 게시글이 없습니다.</h4>
+					</c:if>
 					<h4>${post. title }</h4>
 					<p>
 						${fn:replace(post.contents, newline, "<br>") }
@@ -25,7 +28,7 @@
 				</div>
 				<ul class="blog-list">
 					<c:forEach items="${postlist }" var="vo">
-						<li><a href="${pageContext.request.contextPath}/blog/${blog.id }">${vo.title }</a> <span>${vo.regDate }</span>	</li>
+						<li><a href="${pageContext.request.contextPath}/blog/${blog.id }?postNo=${vo.no }">${vo.title }</a> <span>${vo.regDate }</span>	</li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -41,7 +44,7 @@
 			<h2>카테고리</h2>
 			<ul>
 				<c:forEach items="${category }" var="vo">
-					<li><a href="${pageContext.request.contextPath}/${blog.id }?category=${vo.no }">${vo.name }</a></li>
+					<li><a href="${pageContext.request.contextPath}/blog/${blog.id }?category=${vo.no }">${vo.name }</a></li>
 				</c:forEach>
 			</ul>
 		</div>

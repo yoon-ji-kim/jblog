@@ -37,8 +37,8 @@ public class BlogController {
 	PostService postService;
 	
 	@RequestMapping("/{id}")
-	public String blog(@PathVariable("id")String id,@RequestParam(value="category", required = false)Long categoryNo, Model model) {
-		Map<String, Object> map = blogService.getMainMap(id,categoryNo);
+	public String blog(@PathVariable("id")String id,@RequestParam(value="category", required = false)Long categoryNo,@RequestParam(value = "postNo", required = false)Long postNo, Model model) {
+		Map<String, Object> map = blogService.getMainMap(id,categoryNo, postNo);
 		model.addAllAttributes(map);
 		return "blog/main";
 	}
@@ -78,7 +78,7 @@ public class BlogController {
 	@RequestMapping(value="/{id}/admin/write", method = RequestMethod.POST)
 	public String postWrite(@PathVariable("id")String id, PostVo vo) {
 		postService.insert(vo);
-		return "redirect:/blog/"+id;
+		return "redirect:/blog/"+id+"?category="+vo.getCategoryNo();
 	}
 	@RequestMapping(value="/{id}/admin/category/insert", method = RequestMethod.POST)
 	public String categoryInsert(CategoryVo vo,@PathVariable("id")String id) {
