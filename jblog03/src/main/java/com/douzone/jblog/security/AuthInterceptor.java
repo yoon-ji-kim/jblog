@@ -37,7 +37,8 @@ public class AuthInterceptor implements HandlerInterceptor {
 			return false;
 		}
 		//PathVariable로 넘어오는 blog id 가져오기
-//		String blogId = (String)request.getAttribute("id");
+		//{id}/admin/~~ path: "/zzang9/admin~~"  id(키):zzang(값)
+//		String blogId = (String)request.getAttribute("id");					
 		Map<?, ?> pathVariables = (Map<?,?>)request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 		String blogId = (String)pathVariables.get("id");
 		//authUser와 blogId가 같지 않은 경우 -> 블로그로 보내기

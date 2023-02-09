@@ -21,11 +21,14 @@ public class BlogInterceptor implements HandlerInterceptor {
 		BlogVo blogVo = (BlogVo)request.getServletContext().getAttribute("blog");
 		HttpSession session = request.getSession();
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		if(authUser == null) {
+			response.sendRedirect(request.getContextPath() + "/user/login");
+			return false;
+		}
 		if(blogVo == null) {
 			blogVo = blogService.getBlog(authUser.getId());
 			request.getServletContext().setAttribute("blogvo", blogVo);
 		}
 		return true;
 	}
-	
 }
