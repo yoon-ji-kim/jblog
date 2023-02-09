@@ -38,7 +38,7 @@ public class BlogService {
 		//카테고리 리스트
 		List<CategoryVo> categoryList =categoryRepository.findById(id);
 		//카테고리 선택 안하면 list 제일 앞 category에 해당하는 게시글 리스트
-		if(categoryNo == null) {
+		if(categoryNo == 0) {
 			categoryNo = categoryList.get(0).getNo();
 		}
 		List<PostVo> postList = postRepository.findByCategoryNo(categoryNo);
@@ -47,11 +47,11 @@ public class BlogService {
 			//카테고리 게시글 중 제일 최근 작성된 게시글 찾기
 			vo = postList.get(0);			
 		}
-		if(postNo != null) {
+		if(postNo != 0) {
 			//게시글 선택 시 보여줄 게시글 찾기
 			vo = postRepository.findByPostNo(postNo);
 		}
-		result.put("blog", blog);
+		result.put("blogvo", blog);
 		result.put("category", categoryList);
 		result.put("postlist", postList);
 		result.put("post", vo);

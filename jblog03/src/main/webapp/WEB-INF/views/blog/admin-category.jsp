@@ -15,9 +15,9 @@
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
-					<li><a href="${pageContext.request.contextPath}/blog/${authUser.id}/admin/basic">기본설정</a></li>
+					<li><a href="${pageContext.request.contextPath}/${authUser.id}/admin/basic">기본설정</a></li>
 					<li class="selected">카테고리</li>
-					<li><a href="${pageContext.request.contextPath}/blog/${authUser.id}/admin/write">글작성</a></li>
+					<li><a href="${pageContext.request.contextPath}/${authUser.id}/admin/write">글작성</a></li>
 				</ul>
 		      	<table class="admin-cat">
 		      		<tr>
@@ -32,7 +32,7 @@
 							<td>${vo.name }</td>
 							<td>${vo.postCount }</td>
 							<td>
-								<a href="${pageContext.request.contextPath }/blog/${authUser.id}/admin/category/delete/${vo.no}">
+								<a href="${pageContext.request.contextPath }/${authUser.id}/admin/category/delete/${vo.no}">
 									<img src="${pageContext.request.contextPath}/assets/images/delete.jpg">
 								</a>
 							</td>
@@ -41,7 +41,7 @@
 				</table>
       	
       			<h4 class="n-c">새로운 카테고리 추가</h4>
-      			<form action="${pageContext.request.contextPath }/blog/${authUser.id}/admin/category/insert" method="post">
+      			<form action="${pageContext.request.contextPath }/${authUser.id}/admin/category/insert" method="post">
 			      	<table id="admin-cat-add">
 			      		<tr>
 			      			<td class="t">카테고리명</td>
