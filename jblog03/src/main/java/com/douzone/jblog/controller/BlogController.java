@@ -51,12 +51,12 @@ public class BlogController {
 			Model model) {
 		Long category = 0L;
 		Long post = 0L;
-		if(postNo.isPresent() &&  postNo.getClass().isInstance(post)) {
-			//postNo 값이 들어왔고 postNo타입이 long이면
+		if(postNo.isPresent()) {
+			//postNo 값이 들어왔으면
 			post = postNo.get();
 			category = categoryNo.get();
-		}else if(categoryNo.isPresent() && categoryNo.getClass().isInstance(category)) {
-			//categoryNo 값이 들어왔고 categoryNo 타입이 long이면
+		}else if(categoryNo.isPresent()) {
+			//categoryNo 값이 들어왔으면
 			category = categoryNo.get();
 		}
 		Map<String, Object> map = blogService.getMainMap(id,category, post);

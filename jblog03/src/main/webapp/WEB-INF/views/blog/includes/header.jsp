@@ -13,6 +13,7 @@
 					<li><a href="${pageContext.request.contextPath }/user/logout">로그아웃</a></li>
 					<c:if test="${authUser.id eq blogvo.id }">
 						<li><a href="${pageContext.request.contextPath }/${blogvo.id}/admin/basic">블로그 관리</a></li>
+						<li><a href="${pageContext.request.contextPath }/${blogvo.id}">블로그 메인</a></li>
 					</c:if>
 				</c:otherwise>
 			</c:choose>
