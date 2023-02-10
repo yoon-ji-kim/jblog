@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!doctype html>
 <html>
@@ -41,18 +43,23 @@
 				</table>
       	
       			<h4 class="n-c">새로운 카테고리 추가</h4>
-      			<form action="${pageContext.request.contextPath }/${authUser.id}/admin/category/insert" method="post">
+      			<form:form
+      				modelAttribute="categoryVo" 
+      				action="${pageContext.request.contextPath }/${authUser.id}/admin/category" method="post">
+			      		<p style="color:#f00; text-align:left; padding:0">
+							<form:errors path="name"/>
+						</p> 
 			      	<table id="admin-cat-add">
 			      		<tr>
 			      			<td class="t">카테고리명</td>
-			      			<td><input type="text" name="name"></td>
+			      			<td><input type="text" name="name" value="${categoryVo.name }"></td>
 			      		</tr>
 			      		<tr>
 			      			<td class="s">&nbsp;</td>
 			      			<td><input type="submit" value="카테고리 추가"></td>
-			      		</tr>      		      		
+			      		</tr>     		      		
 			      	</table> 
-      			</form>
+      			</form:form>
 			</div>
 		</div>
 		<c:import url="/WEB-INF/views/blog/includes/footer.jsp" />

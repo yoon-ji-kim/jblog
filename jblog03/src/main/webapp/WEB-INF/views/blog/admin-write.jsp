@@ -2,6 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!doctype html>
 <html>
 <head>
@@ -19,12 +21,17 @@
 					<li><a href="${pageContext.request.contextPath}/${authUser.id}/admin/category">카테고리</a></li>
 					<li class="selected">글작성</li>
 				</ul>
-				<form action="${pageContext.request.contextPath}/${authUser.id}/admin/write" method="post">
+				<form:form
+				 	modelAttribute="postVo"
+					action="${pageContext.request.contextPath}/${authUser.id}/admin/write" method="post">
 			      	<table class="admin-cat-write">
 			      		<tr>
 			      			<td class="t">제목</td>
 			      			<td>
 			      				<input type="text" size="60" name="title">
+			      				<p style="color:#f00; text-align:left; padding:0">
+									<form:errors path="title" />
+								</p>
 				      			<select name="categoryNo">
 				      				<c:forEach items="${categoryList }" var="category">
 					      				<option value="${category.no }">${category.name }</option>
@@ -34,14 +41,19 @@
 			      		</tr>
 			      		<tr>
 			      			<td class="t">내용</td>
-			      			<td><textarea name="contents"></textarea></td>
+			      			<td>
+			      				<textarea name="contents"></textarea>
+			      				<p style="color:#f00; text-align:left; padding:0">
+									<form:errors path="contents" />
+								</p> 
+			      			</td>
 			      		</tr>
 			      		<tr>
 			      			<td>&nbsp;</td>
 			      			<td class="s"><input type="submit" value="포스트하기"></td>
 			      		</tr>
 			      	</table>
-				</form>
+				</form:form>
 			</div>
 		</div>
 		<c:import url="/WEB-INF/views/blog/includes/footer.jsp" />

@@ -6,10 +6,13 @@ import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.ServletContext;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,6 +54,8 @@ public class BlogController {
 			Model model) {
 		Long category = 0L;
 		Long post = 0L;
+//		String postType = postNo.get().getClass().getSimpleName();
+//		String categoryType= categoryNo.get().getClass().getSimpleName();
 		if(postNo.isPresent()) {
 			//postNo 값이 들어왔으면
 			post = postNo.get();
@@ -86,16 +91,31 @@ public class BlogController {
 	}
 	
 	@Auth
-	@RequestMapping("/admin/category")
-	public String adminCategory(@PathVariable("id")String id, Model model) {
+	@RequestMapping(value="/admin/category", method = RequestMethod.GET)
+	public String adminCategory(@ModelAttribute("categoryVo")CategoryVo vo,@PathVariable("id")String id, Model model) {
 		List<CategoryVo> list = categoryService.findById(id);
 		model.addAttribute("list", list);
 		return "blog/admin-category";
 	}
 	
 	@Auth
+	@RequestMapping(value="/admin/category", method = RequestMethod.POST)
+	public String categoryInsert(@PathVariable("id")String id,@ModelAttribute@Valid CategoryVo categoryVo, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			model.addAllAttributes(result.getModel());
+			//return 시키면 category list 없는 문제 발생!
+			List<CategoryVo> list = categoryService.findById(id);
+			model.addAttribute("list", list);
+			return "blog/admin-category";
+		}
+		categoryVo.setId(id);
+		categoryService.insert(categoryVo);
+		return "redirect:/"+categoryVo.getId()+"/admin/category";
+	}
+	
+	@Auth
 	@RequestMapping(value="/admin/write", method = RequestMethod.GET)
-	public String adminWrite(@PathVariable("id")String id, Model model) {
+	public String adminWrite(@ModelAttribute("vo")PostVo vo ,@PathVariable("id")String id, Model model) {
 		List<CategoryVo> categoryList = categoryService.findById(id);
 		model.addAttribute("categoryList" , categoryList);
 		return "blog/admin-write";
@@ -103,18 +123,17 @@ public class BlogController {
 	
 	@Auth
 	@RequestMapping(value="/admin/write", method = RequestMethod.POST)
-	public String postWrite(@PathVariable("id")String id, PostVo vo, Model model) {
+	public String postWrite(@ModelAttribute@Valid PostVo vo, BindingResult result,@PathVariable("id")String id, Model model) {
+		if(result.hasErrors()) {
+			model.addAllAttributes(result.getModel());
+			System.out.println(result.getModel());
+			List<CategoryVo> categoryList = categoryService.findById(id);
+			model.addAttribute("categoryList" , categoryList);
+			return "blog/admin-write";
+		}
 		postService.insert(vo);
 		model.addAttribute("category", vo.getCategoryNo());
 		return "redirect:/"+id+"/{category}";
-	}
-	
-	@Auth
-	@RequestMapping(value="/admin/category/insert", method = RequestMethod.POST)
-	public String categoryInsert(CategoryVo vo,@PathVariable("id")String id) {
-		vo.setId(id);
-		categoryService.insert(vo);
-		return "redirect:/"+vo.getId()+"/admin/category";
 	}
 	
 	@Auth

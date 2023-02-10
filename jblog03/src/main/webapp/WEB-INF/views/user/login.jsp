@@ -16,7 +16,7 @@
 		<c:import url="/WEB-INF/views/includes/menu.jsp" />
 		<form class="login-form" method="post" action="${pageContext.request.contextPath }/user/login">
       		<label>아이디</label> <input type="text" name="id" value=${id }>
-      		<label>패스워드</label> <input type="password" name="password">
+      		<label>패스워드</label> <input style="margin-bottom: 10px; width: 230px; padding: 5px;" type="password" name="password">
       		<input type="submit" value="로그인">
 		</form>
 	</div>
