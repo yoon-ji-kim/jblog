@@ -126,7 +126,6 @@ public class BlogController {
 	public String postWrite(@ModelAttribute@Valid PostVo vo, BindingResult result,@PathVariable("id")String id, Model model) {
 		if(result.hasErrors()) {
 			model.addAllAttributes(result.getModel());
-			System.out.println(result.getModel());
 			List<CategoryVo> categoryList = categoryService.findById(id);
 			model.addAttribute("categoryList" , categoryList);
 			return "blog/admin-write";
