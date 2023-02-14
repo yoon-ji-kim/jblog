@@ -17,4 +17,12 @@
 		and password = password(#{password })
 		]]>
 	</select>
+	
+	<select id="findById" parameterType="string" resultType="boolean">
+		<![CDATA[
+		select if(count(*) = 1, true, false)
+		from user
+		where id = #{id }
+		]]>
+	</select>
 </mapper>

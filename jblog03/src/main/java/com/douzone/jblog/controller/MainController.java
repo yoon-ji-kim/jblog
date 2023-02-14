@@ -10,4 +10,9 @@ public class MainController {
 	public String index() {
 		return "main/index";
 	}
+	
+	@RequestMapping("/error")
+	public String error() {
+		return "error/404";
+	}
 }

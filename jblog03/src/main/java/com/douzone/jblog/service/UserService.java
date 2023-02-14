@@ -32,4 +32,8 @@ public class UserService {
 	public UserVo getUser(UserVo vo) {
 		return userRepository.findByIdAndPassword(vo.getId(), vo.getPassword());
 	}
+	
+	public boolean findUser(String id) {
+		return userRepository.findById(id);
+	}
 }
