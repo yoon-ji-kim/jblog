@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="category" >
+	<insert id="insert" parameterType="categoryvo">
+		<![CDATA[
+		insert into category
+		values(null, #{name }, #{id })
+		]]>
+	</insert>
+	<resultMap type="categoryvo" id="findList">
+		<id property="no" column="no"/>
+		<result property="name" column="name"/>
+		<result property="id" column="id"/>
+		<result property="postCount" column="count(category_no)" />
+	</resultMap>
+	<select id="findById" parameterType="string" resultMap="findList">
+		<![CDATA[
+		select a.no, a.name, id, count(category_no)
+		from category a
+		left join post b
+		on a.no = b.category_no
+		where id = #{id }
+		group by a.no
+		order by a.no desc
+		]]>
+	</select>
+	
+	<delete id="deleteByIdAndNo" parameterType="map">
+		<![CDATA[
+		delete from category
+		where id = #{id } and no = #{no }	
+		]]>
+	</delete>
+</mapper>
