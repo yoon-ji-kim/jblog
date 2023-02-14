@@ -38,10 +38,10 @@ public class BlogService {
 		//카테고리 리스트
 		List<CategoryVo> categoryList =categoryRepository.findById(id);
 		//카테고리 선택 안하면 list 제일 앞 category에 해당하는 게시글 리스트
-		if(categoryNo == 0) {
+		if(categoryNo == 0 && categoryList.size()>0) {
 			categoryNo = categoryList.get(0).getNo();
 		}
-		List<PostVo> postList = postRepository.findByCategoryNo(categoryNo);
+		List<PostVo> postList = postRepository.findByCategoryNo(categoryNo, id);
 		PostVo vo = null;
 		if(!postList.isEmpty()) {
 			//카테고리 게시글 중 제일 최근 작성된 게시글 찾기

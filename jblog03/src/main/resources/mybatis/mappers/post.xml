@@ -15,12 +15,15 @@
 		]]>
 	</delete>
 	
-	<select id="findByCategoryNo" parameterType="long" resultType="postvo">
+	<select id="findByCategoryNo" parameterType="map" resultType="postvo">
 		<![CDATA[
-		select no, title, contents, date_format(reg_date, '%Y-%m-%d') as regDate, category_no as categoryNo
-		from post
+		select a.no, title, contents, date_format(reg_date, '%Y-%m-%d') as regDate, category_no as categoryNo
+		from post a
+        join category b
+        on category_no = b.no
 		where category_no = #{categoryNo }
-		order by reg_date desc	
+        and b.id = #{id }
+		order by reg_date desc
 		]]>
 	</select>
 	

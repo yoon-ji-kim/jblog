@@ -22,7 +22,7 @@
 		on a.no = b.category_no
 		where id = #{id }
 		group by a.no
-		order by a.no
+		order by a.no desc
 		]]>
 	</select>
 	

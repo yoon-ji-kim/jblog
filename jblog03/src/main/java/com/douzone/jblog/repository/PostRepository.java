@@ -1,6 +1,7 @@
 package com.douzone.jblog.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,9 @@ public class PostRepository {
 		sqlSession.delete("post.delete",no);
 	}
 
-	public List<PostVo> findByCategoryNo(Long categoryNo) {
-		return sqlSession.selectList("post.findByCategoryNo", categoryNo);
+	public List<PostVo> findByCategoryNo(Long categoryNo, String id) {
+		Map<String, Object> map = Map.of("categoryNo", categoryNo, "id", id);
+		return sqlSession.selectList("post.findByCategoryNo", map);
 	}
 
 	public PostVo findByPostNo(Long postNo) {
