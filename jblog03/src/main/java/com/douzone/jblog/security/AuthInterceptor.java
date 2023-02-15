@@ -45,11 +45,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 //		String blogId = (String)request.getAttribute("id");					
 		Map<?, ?> pathVariables = (Map<?,?>)request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 		String blogId = (String)pathVariables.get("id");
-		System.out.println(userService.findUser(blogId));
-//		if(!userService.findUser(blogId)) {
-//			response.sendRedirect(request.getContextPath() + "/error");
-//			return false;
-//		}
+
 		//authUser와 blogId가 같지 않은 경우 -> 블로그로 보내기
 		if(!Objects.equals(authUser.getId(), blogId)) {
 			response.sendRedirect(request.getContextPath()+"/blog/"+blogId);

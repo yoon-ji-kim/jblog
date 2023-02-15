@@ -57,11 +57,7 @@ public class BlogController {
 			Model model) {
 		Long category = 0L;
 		Long post = 0L;
-//		String postType = postNo.get().getClass().getSimpleName();
-//		String categoryType= categoryNo.get().getClass().getSimpleName();
-//		System.out.println(id);
-//		System.out.println(userService.findUser(id));
-		if(!userService.findUser(id)) {
+		if(!userService.findUser(id) ) {
 			return "error/404";
 		}
 		if(postNo.isPresent()) {

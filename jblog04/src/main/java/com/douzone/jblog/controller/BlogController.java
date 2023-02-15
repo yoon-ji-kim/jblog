@@ -24,6 +24,7 @@ import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.service.CategoryService;
 import com.douzone.jblog.service.FileUploadService;
 import com.douzone.jblog.service.PostService;
+import com.douzone.jblog.service.UserService;
 import com.douzone.jblog.vo.BlogVo;
 import com.douzone.jblog.vo.CategoryVo;
 import com.douzone.jblog.vo.PostVo;
@@ -46,6 +47,8 @@ public class BlogController {
 	@Autowired
 	private ServletContext servletContext;
 	
+	@Autowired
+	UserService userService;
 	@RequestMapping({"", "/{category}", "/{category}/{post}"})
 	public String blog(
 			@PathVariable("id")String id,
@@ -54,8 +57,9 @@ public class BlogController {
 			Model model) {
 		Long category = 0L;
 		Long post = 0L;
-//		String postType = postNo.get().getClass().getSimpleName();
-//		String categoryType= categoryNo.get().getClass().getSimpleName();
+		if(!userService.findUser(id) ) {
+			return "error/404";
+		}
 		if(postNo.isPresent()) {
 			//postNo 값이 들어왔으면
 			post = postNo.get();
