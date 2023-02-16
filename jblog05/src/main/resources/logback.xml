@@ -11,7 +11,7 @@
 	
 	<!-- 한 곳에 모인 exception을 로그로 남기기 -->
 	<appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/mysite-logs/exception.log</file>
+		<file>/jblog-logs/exception.log</file>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<Pattern>
 				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n
@@ -19,7 +19,7 @@
 		</encoder>
 		<!-- 아카이빙 롤링 50kb 넘으면 logex2.log.zip으로 압축해서 0byte부터 로깅해서 %i(번호)로 만들겠다 1에서부터 10까지(반복)-->
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<FileNamePattern>/mysite-logs/exception.%i.log.zip</FileNamePattern>
+			<FileNamePattern>/jblog-logs/exception.%i.log.zip</FileNamePattern>
 			<MinIndex>1</MinIndex>
 			<MaxIndex>10</MaxIndex>
 		</rollingPolicy>

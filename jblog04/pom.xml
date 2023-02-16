@@ -63,6 +63,17 @@
 		   <artifactId>hibernate-validator</artifactId>
 		   <version>6.2.3.Final</version>
 		</dependency>
+		<!-- Logback --> 
+		<dependency>                                    
+			<groupId>org.slf4j</groupId>                
+			<artifactId>jcl-over-slf4j</artifactId>     
+			<version>${jcloverslf4j.version}</version>  
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
 		<!-- fileupload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
